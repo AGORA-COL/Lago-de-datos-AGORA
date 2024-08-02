@@ -1,0 +1,17 @@
+# Configuración de la corrección de errores
+error_correction:
+  source: "nacimientos"
+  process_errors: true
+  error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados.txt"
+  corrected_output_path: "hdfs:///stagedata/vitales/nacimientos/"
+  encoding: "latin1"
+  replacements:
+    - search: "Bogotá, D.C."
+      replace: "Bogotá D.C."
+  input_columns: ['PersonaID', 'FechaNacimientoAAAAMM', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaCertificadoAAAAMM', 'IpsDondeRealizaParto', 'Peso']
+  output_columns: ["personaid", "fechanacimiento", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechacertificado", "ips", "peso"]
+  new_error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados_nuevo.txt"
+
+# Configuración de Spark
+spark:
+  log_gc_path: "/home/agora/DataLake/ETL/logs/driver-gc.log"
