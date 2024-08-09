@@ -2,7 +2,7 @@
 sources:
   - name: "nacimientos"
     input_path: "hdfs:///rawdata/vitales/nacimientos/"
-    output_path: "hdfs:///stagedata/vitales/nacimientos/"
+    output_path: "hdfs:///stagedata/vitales/nacimientos_test/"
     input_files: ["ConsultarNacimientos_2008_a_2016.txt", "ConsultarNacimientos_2017_a_2023.txt"]
     input_columns: ['PersonaID', 'FechaNacimientoAAAAMM', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaCertificadoAAAAMM', 'IpsDondeRealizaParto', 'Peso']
     output_columns: ["personaid", "fechanacimiento", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechacertificado", "ips", "peso"]
@@ -32,11 +32,11 @@ sources:
       - original: "Peso"
         new: "peso"
     process: false
-    error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados.txt"
+    error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados_test.txt"
     encoding: "latin1"
   - name: "defunciones"
     input_path: "hdfs:///rawdata/vitales/defunciones/"
-    output_path: "hdfs:///stagedata/vitales/defunciones/"
+    output_path: "hdfs:///stagedata/vitales/defunciones_test/"
     input_files: ["ConsultarDefunciones_2008_a_2016.txt", "ConsultarDefunciones_2017_a_2023.txt"]
     input_columns: ['PersonaID', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaDefuncionAAAAMM', 'IpsDondeRealizaParto', 'Peso', 'AnoID']
     output_columns: ["personaid", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechadefuncion", "ips", "peso", "anoid"]
@@ -66,11 +66,11 @@ sources:
       - original: "AnoID"
         new: "anoid"
     process: false
-    error_file: "/home/agora/DataLake/ETL/errors/vitales/defunciones/defunciones_errados.txt"
+    error_file: "/home/agora/DataLake/ETL/errors/vitales/defunciones/defunciones_errados_test.txt"
     encoding: "latin1"
   - name: "sivigila"
     input_path: "hdfs:///rawdata/sivigila/"
-    output_path: "hdfs:///stagedata/sivigila/"
+    output_path: "hdfs:///stagedata/sivigila_test/"
     input_files: ["Sivigila_2008_2011.txt", "Sivigila_2012_2020.txt", "Sivigila_2021_2023.txt"]
     input_columns: ['PersonaBasicaID', 'Evento', 'AñoEpidemiologico', 'SemanaEpidemilogica', 'Prestador', 'CodigoAdministradora', 'Administradora', 'Edad', 'UnidadMedidaEdad', 'Sexo', 'TipoRegimen', 'codigoOcupacion', 'Ocupacion', 'Etnia', 'ClasificacioninicialCaso', 'PacienteHospitalizado', 'SeguimientoFinalCaso', 'FechaNotificacion', 'FechaConsulta', 'FechaInicioSINTOmas', 'FechaHospitalizacion', 'FechaDefuncion', 'FechaNcto', 'FechaAjuste', 'GP_Discapacidad', 'GP_Despazados', 'GP_Migrantes', 'GP_Carcelarios', 'GP_Gestantes', 'GP_Indigenas', 'GP_PoblacionICBF', 'GP_MadresComunitarias', 'GP_Desmovilizados', 'GP_Psiquia', 'GP_VictimasViolencia', 'GP_otros', 'codigoPaisOcurrencia', 'PaisOcurrencia', 'codigoDepartamentoOcurrencia', 'DepartamentoOcurrencia', 'codigoMunicipioOcurrencia', 'MunicipioOcurrencia', 'codigoDepartamentoNotificacion', 'DepartamentoNotificacion', 'codigoMunicipioNotificacion', 'MunicipioNotificacion', 'codigoDepartamentoResidencia', 'DepartamentoResidencia', 'codigoMunicipioResidencia', 'MunicipioResidencia', 'Area', 'CondicionFinal', 'CodigoDiagnosticoDefuncion', 'DiagnosticoDefuncion', 'TipoUPGD', 'EstadoFinalCaso', 'Confirmado']
     output_columns: ["personaid", "evento", "anioepidemiologico", "semanaepidemilogica", "prestador", "codigoadministradora", "administradora", "edad", "unidadmedidaedad", "sexo", "tiporegimen", "codigocupacion", "ocupacion", "etnia", "clasificacioninicialcaso", "pacientehospitalizado", "seguimientofinalcaso", "fechanotificacion", "fechaconsulta", "fechainiciosintomas", "fechahospitalizacion", "fechadefuncion", "fechancto", "fechaajuste", "gp_discapacidad", "gp_despazados", "gp_migrantes", "gp_carcelarios", "gp_gestantes", "gp_indigenas", "gp_poblacionicbf", "gp_madrescomunitarias", "gp_desmovilizados", "gp_psiquia", "gp_victimasviolencia", "gp_otros", "codigopaisocurrencia", "paisocurrencia", "codigodepartamentoocurrencia", "departamentoocurrencia", "codigomunicipioocurrencia", "municipioocurrencia", "codigodepartamentonotificacion", "departamentonotificacion", "codigomunicipionotificacion", "municipionotificacion", "codigodepartamentoresidencia", "departamentoresidencia", "codigomunicipioresidencia", "municipioresidencia", "area", "condicionfinal", "codigodiagnosticodefuncion", "diagnosticodefuncion", "tipoupgd", "estadofinalcaso", "confirmado"]
@@ -190,7 +190,7 @@ sources:
       - original: "Confirmado"
         new: "confirmado"
     process: true
-    error_file: "/home/agora/DataLake/ETL/errors/sivigila/sivigila_errados.txt"
+    error_file: "/home/agora/DataLake/ETL/errors/sivigila/sivigila_errados_test.txt"
     encoding: "latin1"
 
 # Configuración de la salida
