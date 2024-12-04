@@ -1,4 +1,4 @@
-# Configuración de las fuentes de datos
+#Configuración de las fuentes de datos
 records_to_process: 100
 sources:
   - name: "nacimientos"
