@@ -26,31 +26,38 @@ def load_config(config_path):
         config = yaml.safe_load(file)
     return config
 
-def read_and_validate_file_from_hdfs(spark, input_file, expected_columns, error_handler, is_first_file):
+def read_and_validate_file_from_hdfs(spark, input_file, expected_columns, error_handler, separator, encoding, limit):
     """
-    Lee y valida el archivo desde HDFS en el controlador, detectando errores y separando los registros válidos.
-    Si `is_first_file` es True, elimina la primera línea del archivo como encabezado.
+    Lee y valida el archivo desde HDFS, detectando errores y separando los registros válidos.
+    :param spark: SparkSession
+    :param input_file: Ruta del archivo en HDFS
+    :param expected_columns: Número de columnas esperadas
+    :param error_handler: Instancia de ErrorHandler
+    :param separator: Separador del archivo
+    :param encoding: Codificación del archivo
+    :param limit: Límite de registros a leer ('all' para leer todos)
+    :return: Lista de registros válidos, total de líneas procesadas, encabezado del archivo
     """
-    print(f"Leyendo y validando archivo: {input_file}")
+    print(f"Leyendo y validando archivo: {input_file} con separador '{separator}' y codificación '{encoding}'")
     valid_lines = []
     total_lines = 0
 
-    rdd = spark.sparkContext.textFile(input_file)
-    if is_first_file:
-        header_line = rdd.first()
-        rdd = rdd.filter(lambda line: line != header_line)
-    else:
-        header_line = None
+    df = spark.read.option("header", "true") \
+        .option("sep", separator) \
+        .option("encoding", encoding) \
+        .csv(input_file)
 
-    for line in rdd.collect():
+    if limit != "all":
+        df = df.limit(limit)
+
+    for row in df.collect():
         total_lines += 1
-        columns = line.split(',')
-        if len(columns) == expected_columns:
-            valid_lines.append(columns)
+        if len(row) == expected_columns:
+            valid_lines.append(row)
         else:
-            error_handler.handle_error(line)
+            error_handler.handle_error(row)
 
-    return valid_lines, total_lines, header_line
+    return valid_lines, total_lines, df.columns
 
 def write_to_parquet(spark, valid_lines, output_path, columns):
     """
@@ -63,44 +70,12 @@ def write_to_parquet(spark, valid_lines, output_path, columns):
             pbar.update(len(partition))
         df.write.mode('overwrite').parquet(output_path)
 
-def write_errors_to_local(errors, error_file, header, encoding):
-    """Escribe los errores acumulados en un archivo local con salida de porcentaje de avance."""
-    os.makedirs(os.path.dirname(error_file), exist_ok=True)
-
-    # Eliminar el archivo de errores si ya existe
-    if os.path.exists(error_file):
-        os.remove(error_file)
-
-    total_errors = len(errors)
-    start_time = time.time()
-
-    with open(error_file, 'w', encoding=encoding, errors='replace') as ef:
-        # Escribir el encabezado en el archivo de errores
-        ef.write(header + '\n')
-        for i, line in enumerate(errors):
-            ef.write(line + '\n')
-            if (i + 1) % (total_errors // 4) == 0:  # Actualizar cada 25% de progreso
-                elapsed_time = time.time() - start_time
-                progress = (i + 1) / total_errors * 100
-                speed = (i + 1) / elapsed_time
-                estimated_time = elapsed_time / (i + 1) * (total_errors - (i + 1))
-                print(f"\rProgreso: {progress:.2f}% - Escrito: {i+1}/{total_errors} - Velocidad: {speed:.2f} líneas/seg - Tiempo estimado restante: {estimated_time:.2f} seg", end='')
-
-    print("\nProcesamiento de errores completado.")
-
-def clean_output_directory(spark, output_path):
-    """Limpia el directorio de salida en HDFS."""
-    hadoop_fs = spark._jvm.org.apache.hadoop.fs.FileSystem.get(spark._jsc.hadoopConfiguration())
-    output_path_hdfs = spark._jvm.org.apache.hadoop.fs.Path(output_path)
-    if hadoop_fs.exists(output_path_hdfs):
-        print(f"Limpiando el directorio de salida: {output_path}")
-        hadoop_fs.delete(output_path_hdfs, True)
-
 def main():
     """Función principal que ejecuta el proceso ETL completo."""
     config = load_config(os.path.join('config', 'config.yaml'))
     
     max_parquet_file_size = config['output']['max_file_size_mb'] * 1024 * 1024  # Convertir MB a bytes
+    records_to_process = config["records_to_process"]  # Leer el límite de registros desde la configuración
     
     total_records = 0
     total_valid_records = 0
@@ -119,13 +94,16 @@ def main():
 
             error_file = source['error_file']
             encoding = source.get('encoding', 'utf-8')
+            separator = source.get('separator', ',')  # Obtener el separador desde la configuración
             error_handler = ErrorHandler()
 
             all_valid_lines = []
             header_line = None
             for i, input_file in enumerate(source['input_files']):
                 input_path = os.path.join(source['input_path'], input_file)
-                valid_lines, total_lines, file_header = read_and_validate_file_from_hdfs(spark, input_path, len(source['input_columns']), error_handler, is_first_file=(i == 0))
+                valid_lines, total_lines, file_header = read_and_validate_file_from_hdfs(
+                    spark, input_path, len(source['input_columns']), error_handler, separator, encoding, records_to_process
+                )
                 if i == 0:
                     header_line = file_header
                 else:
