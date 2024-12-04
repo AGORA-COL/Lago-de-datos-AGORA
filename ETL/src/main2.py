@@ -70,6 +70,14 @@ def write_to_parquet(spark, valid_lines, output_path, columns):
             pbar.update(len(partition))
         df.write.mode('overwrite').parquet(output_path)
 
+def clean_output_directory(spark, output_path):
+    """Limpia el directorio de salida en HDFS."""
+    hadoop_fs = spark._jvm.org.apache.hadoop.fs.FileSystem.get(spark._jsc.hadoopConfiguration())
+    output_path_hdfs = spark._jvm.org.apache.hadoop.fs.Path(output_path)
+    if hadoop_fs.exists(output_path_hdfs):
+        print(f"Limpiando el directorio de salida: {output_path}")
+        hadoop_fs.delete(output_path_hdfs, True)
+
 def main():
     """Función principal que ejecuta el proceso ETL completo."""
     config = load_config(os.path.join('config', 'config.yaml'))

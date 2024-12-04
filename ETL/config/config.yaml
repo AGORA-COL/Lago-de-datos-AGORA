@@ -1,4 +1,5 @@
 # Configuración de las fuentes de datos
+records_to_process: 100
 sources:
   - name: "nacimientos"
     input_path: "hdfs:///rawdata/vitales/nacimientos/"
@@ -31,7 +32,7 @@ sources:
         new: "ips"
       - original: "Peso"
         new: "peso"
-    process: false
+    process: true
     error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados_test.txt"
     encoding: "latin1"
   - name: "defunciones"
@@ -189,7 +190,7 @@ sources:
         new: "estadofinalcaso"
       - original: "Confirmado"
         new: "confirmado"
-    process: true
+    process: false
     error_file: "/home/agora/DataLake/ETL/errors/sivigila/sivigila_errados_test.txt"
     encoding: "latin1"
 
