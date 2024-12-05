@@ -59,16 +59,28 @@ def read_and_validate_file_from_hdfs(spark, input_file, expected_columns, error_
 
     return valid_lines, total_lines, df.columns
 
+#def write_to_parquet(spark, valid_lines, output_path, columns):
+#    """
+#    Escribe las líneas válidas en un archivo Parquet usando Spark.
+#    """
+#    df = spark.createDataFrame(valid_lines, columns)
+#    # Escribir con una barra de progreso
+#    with tqdm(total=len(valid_lines), unit='records', desc="Escribiendo Parquet") as pbar:
+#        for partition in df.rdd.glom().collect():
+#            pbar.update(len(partition))
+#        df.write.mode('overwrite').parquet(output_path)
+
 def write_to_parquet(spark, valid_lines, output_path, columns):
     """
     Escribe las líneas válidas en un archivo Parquet usando Spark.
     """
+    # Crear el DataFrame con las líneas válidas y las columnas
     df = spark.createDataFrame(valid_lines, columns)
-    # Escribir con una barra de progreso
-    with tqdm(total=len(valid_lines), unit='records', desc="Escribiendo Parquet") as pbar:
-        for partition in df.rdd.glom().collect():
-            pbar.update(len(partition))
-        df.write.mode('overwrite').parquet(output_path)
+    
+    # Escribir los datos directamente en el archivo Parquet
+    print(f"Escribiendo datos a Parquet en la ruta: {output_path}")
+    df.write.mode('overwrite').parquet(output_path)
+    print(f"Escritura completada en: {output_path}")
 
 def clean_output_directory(spark, output_path):
     """Limpia el directorio de salida en HDFS."""
@@ -77,6 +89,33 @@ def clean_output_directory(spark, output_path):
     if hadoop_fs.exists(output_path_hdfs):
         print(f"Limpiando el directorio de salida: {output_path}")
         hadoop_fs.delete(output_path_hdfs, True)
+
+def write_errors_to_local(errors, error_file, header, encoding):
+    """Escribe los errores acumulados en un archivo local con salida de porcentaje de avance."""
+    os.makedirs(os.path.dirname(error_file), exist_ok=True)
+
+    # Eliminar el archivo de errores si ya existe
+    if os.path.exists(error_file):
+        os.remove(error_file)
+
+    total_errors = len(errors)
+    start_time = time.time()
+
+    with open(error_file, 'w', encoding=encoding, errors='replace') as ef:
+        # Escribir el encabezado en el archivo de errores
+        ef.write(header + '\n')
+        for i, line in enumerate(errors):
+            ef.write(line + '\n')
+            if (i + 1) % (total_errors // 4) == 0:  # Actualizar cada 25% de progreso
+                elapsed_time = time.time() - start_time
+                progress = (i + 1) / total_errors * 100
+                speed = (i + 1) / elapsed_time
+                estimated_time = elapsed_time / (i + 1) * (total_errors - (i + 1))
+                print(
+                    f"\rProgreso: {progress:.2f}% - Escrito: {i + 1}/{total_errors} - Velocidad: {speed:.2f} líneas/seg - Tiempo estimado restante: {estimated_time:.2f} seg",
+                    end='')
+
+    print("\nProcesamiento de errores completado.")
 
 def main():
     """Función principal que ejecuta el proceso ETL completo."""
