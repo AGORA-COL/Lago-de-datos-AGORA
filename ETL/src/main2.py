@@ -102,18 +102,24 @@ def write_errors_to_local(errors, error_file, header, encoding):
     start_time = time.time()
 
     with open(error_file, 'w', encoding=encoding, errors='replace') as ef:
-        # Escribir el encabezado en el archivo de errores
-        ef.write(header + '\n')
+        # Convertir el encabezado a una cadena separada por comas y escribirlo
+        ef.write(",".join(header) + '\n')
+        
+        # Escribir los errores
         for i, line in enumerate(errors):
-            ef.write(line + '\n')
-            if (i + 1) % (total_errors // 4) == 0:  # Actualizar cada 25% de progreso
+            # Convertir la tupla en una cadena separada por comas
+            ef.write(",".join(map(str, line)) + '\n')
+            
+            if (i + 1) % (total_errors // 4 or 1) == 0:  # Actualizar cada 25% de progreso
                 elapsed_time = time.time() - start_time
                 progress = (i + 1) / total_errors * 100
                 speed = (i + 1) / elapsed_time
                 estimated_time = elapsed_time / (i + 1) * (total_errors - (i + 1))
                 print(
-                    f"\rProgreso: {progress:.2f}% - Escrito: {i + 1}/{total_errors} - Velocidad: {speed:.2f} líneas/seg - Tiempo estimado restante: {estimated_time:.2f} seg",
-                    end='')
+                    f"\rProgreso: {progress:.2f}% - Escrito: {i + 1}/{total_errors} - "
+                    f"Velocidad: {speed:.2f} líneas/seg - Tiempo estimado restante: {estimated_time:.2f} seg",
+                    end=''
+                )
 
     print("\nProcesamiento de errores completado.")
 

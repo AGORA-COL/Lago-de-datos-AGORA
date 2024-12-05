@@ -2,13 +2,15 @@
 records_to_process: all
 sources:
   - name: "nacimientos"
-    separator: "|"
+    separator: "," #"|"
     input_path: "hdfs:///rawdata/vitales/nacimientos/"
-    output_path: "hdfs:///stagedata/vitales/nacimientos_test4/"
-    #input_files: ["ConsultarNacimientos_2008_a_2016.txt", "ConsultarNacimientos_2017_a_2023.txt"]
-    input_files: ["ConsultarNacimientos2008-2023_V3.csv"]
-    input_columns: ['PersonaID', 'FechaNacimientoAAAAMM', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaCertificadoAAAAMM', 'IpsDondeRealizaParto', 'Peso', 'AnoID']
-    output_columns: ["personaid", "fechanacimiento", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechacertificado", "ips", "peso", "anoid"]
+    output_path: "hdfs:///stagedata/vitales/nacimientos_test5/"
+    input_files: ["ConsultarNacimientos_2008_a_2016.txt", "ConsultarNacimientos_2017_a_2023.txt"]
+    #input_files: ["ConsultarNacimientos2008-2023_V3.csv"]
+    #input_columns: ['PersonaID', 'FechaNacimientoAAAAMM', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaCertificadoAAAAMM', 'IpsDondeRealizaParto', 'Peso', 'AnoID']
+    input_columns: ['PersonaID', 'FechaNacimientoAAAAMM', 'Sexo', 'RegimenAfiliacionSGSSS', 'Administradora', 'CodigoPertenenciaEtnica', 'municipioResidencia', 'SemanasGestacion', 'EdadMadreMomentoDiagnostico', 'FechaCertificadoAAAAMM', 'IpsDondeRealizaParto', 'Peso']
+    #output_columns: ["personaid", "fechanacimiento", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechacertificado", "ips", "peso", "anoid"]
+    output_columns: ["personaid", "fechanacimiento", "sexo", "regimenafiliacion", "administradora", "codigoetnia", "municipioresidencia", "semanasgestacion", "edadmadre", "fechacertificado", "ips", "peso"]
     column_renames:
       - original: "PersonaID"
         new: "personaid"
@@ -34,8 +36,10 @@ sources:
         new: "ips"
       - original: "Peso"
         new: "peso"
+     # - original: "AnoID"
+     #   new: "anoid"    
     process: true
-    error_file: "/home/agora/DataLake/ETL/errors/vitales/nacimientos/nacimientos_errados_test.txt"
+    error_file: "/home/agora/Data_lake/ETL/errors/vitales/nacimientos/nacimientos_errados_test.txt"
     encoding: "latin1"
   - name: "defunciones"
     input_path: "hdfs:///rawdata/vitales/defunciones/"
