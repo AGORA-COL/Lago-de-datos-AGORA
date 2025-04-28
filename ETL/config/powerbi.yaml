@@ -1,0 +1,42 @@
+sources:
+  - name: "nacimientos"
+    input_path: "hdfs:///stagedata/vitales/nacimientos/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.VITALES_Nacimientos_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
+    process: false
+    limit_records: 10000
+
+  - name: "defunciones"
+    input_path: "hdfs:///stagedata/vitales/defunciones/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.VITALES_Defunciones_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
+    process: false
+    limit_records: 10000
+
+  - name: "vacunascovid"
+    input_path: "hdfs:///stagedata/vacunascovid/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.VACUNASCOVIDv2_Tabla_anio_mes_sexo_Edad_TipoRegimenAfil_NroDosis_Biologico_CAC_Varios_CausaBasicaDeFuncion_DefuncionSospechosoCovid_Todos.parquet"
+    process: false
+    limit_records: 10000
+
+  - name: "segcovid"
+    input_path: "hdfs:///stagedata/segcovid/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.SEGCOVID_Tabla_anio_mes_AntecedenteHipertension_Todos.parquet"
+    process: false
+    limit_records: 10000
+
+  - name: "sivigila"
+    input_path: "hdfs:///stagedata/sivigila/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.SIVIGILA_Tabla_anio_mes_Edad_sexo_TipoRegimen_Todos.parquet"
+    process: false
+    limit_records: 10000
+
+  - name: "rips"
+    input_path: "hdfs:///stagedata/rips/"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_file: "1.Tabla_anio_mes_atenciones_2020.parquet"
+    process: false
+    limit_records: 10000
