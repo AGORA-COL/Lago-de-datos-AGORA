@@ -1,42 +1,150 @@
+records_to_process: 1000
 sources:
-  - name: "nacimientos"
-    input_path: "hdfs:///stagedata/vitales/nacimientos/"
-    output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.VITALES_Nacimientos_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
-    process: false
-    limit_records: 10000
-
-  - name: "defunciones"
-    input_path: "hdfs:///stagedata/vitales/defunciones/"
-    output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.VITALES_Defunciones_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
-    process: false
-    limit_records: 10000
-
-  - name: "vacunascovid"
-    input_path: "hdfs:///stagedata/vacunascovid/"
-    output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.VACUNASCOVIDv2_Tabla_anio_mes_sexo_Edad_TipoRegimenAfil_NroDosis_Biologico_CAC_Varios_CausaBasicaDeFuncion_DefuncionSospechosoCovid_Todos.parquet"
-    process: false
-    limit_records: 10000
-
   - name: "segcovid"
+    process: false
     input_path: "hdfs:///stagedata/segcovid/"
+    input_subdirs:
+      - "segcovid_parquet_2020"
+      - "segcovid_parquet_2021"
+      - "segcovid_parquet_2022"
+      - "segcovid_parquet_2023"
     output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.SEGCOVID_Tabla_anio_mes_AntecedenteHipertension_Todos.parquet"
-    process: false
-    limit_records: 10000
-
+    output_files:
+      - file_name: "1.SEGCOVID_Tabla_anio_mes_AntecedenteHipertension_Todos.parquet"
+        variable: "AntecedenteHipertension"
+      - file_name: "2.SEGCOVID_Tabla_anio_mes_AntecedenteArtritis_Todos.parquet"
+        variable: "AntecedenteArtritis"
+      - file_name: "3.SEGCOVID_Tabla_anio_mes_AntecedenteAsma_Todos.parquet"
+        variable: "AntecedenteAsma"
+      - file_name: "4.SEGCOVID_Tabla_anio_mes_AntecedenteCancer_Todos.parquet"
+        variable: "AntecedenteCancer"
+      - file_name: "5.SEGCOVID_Tabla_anio_mes_AntecedenteDiabetes_Todos.parquet"
+        variable: "AntecedenteDiabetes"
+      - file_name: "6.SEGCOVID_Tabla_anio_mes_AntecedenteEnfermedadHuerfana_Todos.parquet"
+        variable: "AntecedenteEnfermedadHuerfana"
+      - file_name: "7.SEGCOVID_Tabla_anio_mes_AntecedenteEPOC_Todos.parquet"
+        variable: "AntecedenteEPOC"
+      - file_name: "8.SEGCOVID_Tabla_anio_mes_AntecedenteERC_Todos.parquet"
+        variable: "AntecedenteERC"
+      - file_name: "9.SEGCOVID_Tabla_anio_mes_AntecedenteObesidad_Todos.parquet"
+        variable: "AntecedenteObesidad"
+      - file_name: "10.SEGCOVID_Tabla_anio_mes_AntecedenteVIH_Todos.parquet"
+        variable: "AntecedenteVIH"
+      - file_name: "11.SEGCOVID_Tabla_anio_mes_FactorRiesgoCancer_Todos.parquet"
+        variable: "FactorRiesgoCancer"
+      - file_name: "12.SEGCOVID_Tabla_anio_mes_FactorRiesgoCondicionImpidaAislamiento_Todos.parquet"
+        variable: "FactorRiesgoCondicionImpidaAislamiento"
+      - file_name: "13.SEGCOVID_Tabla_anio_mes_FactorRiesgoDiabetes_Todos.parquet"
+        variable: "FactorRiesgoDiabetes"
+      - file_name: "14.SEGCOVID_Tabla_anio_mes_FactorRiesgoEnfermedadCardiovascular_Todos.parquet"
+        variable: "FactorRiesgoEnfermedadCardiovascular"
+      - file_name: "15.SEGCOVID_Tabla_anio_mes_FactorRiesgoEnfermedadRespiratoriaCronica_Todos.parquet"
+        variable: "FactorRiesgoEnfermedadRespiratoriaCronica"
+      - file_name: "16.SEGCOVID_Tabla_anio_mes_FactorRiesgoInmunodeficiencia.parquet"
+        variable: "FactorRiesgoInmunodeficiencia"
+      - file_name: "17.SEGCOVID_Tabla_anio_mes_FactorRiesgoMayor59.parquet"
+        variable: "FactorRiesgoMayor59"
   - name: "sivigila"
+    process: false
     input_path: "hdfs:///stagedata/sivigila/"
+    input_subdirs:
+      - "sivigila_parquet_2008"
+      - "sivigila_parquet_2009"
+      - "sivigila_parquet_2010"
+      - "sivigila_parquet_2011"
+      - "sivigila_parquet_2012"
+      - "sivigila_parquet_2013"
+      - "sivigila_parquet_2014"
+      - "sivigila_parquet_2015"
+      - "sivigila_parquet_2016"
+      - "sivigila_parquet_2017"
+      - "sivigila_parquet_2018"
+      - "sivigila_parquet_2019"
+      - "sivigila_parquet_2020"
+      - "sivigila_parquet_2021"
+      - "sivigila_parquet_2022"
     output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.SIVIGILA_Tabla_anio_mes_Edad_sexo_TipoRegimen_Todos.parquet"
+    output_files:
+      - file_name: "1.SIVIGILA_Tabla_anio_mes_Edad_sexo_Evento_Todos.parquet"
+        variable: "Evento"
+      - file_name: "2.SIVIGILA_Tabla_anio_mes_Edad_sexo_TipoRegimen_Todos.parquet"
+        variable: "TipoRegimen"
+      - file_name: "3.SIVIGILA_Tabla_anio_mes_Edad_sexo_Area_Todos.parquet"
+        variable: "Area"
+      - file_name: "4.SIVIGILA_Tabla_anio_mes_Edad_sexo_PacienteHospitalizado_Todos.parquet"
+        variable: "PacienteHospitalizado"
+      - file_name: "5.SIVIGILA_Tabla_anio_mes_Edad_sexo_CondicionFinal_Todos.parquet"
+        variable: "CondicionFinal"
+      - file_name: "6.SIVIGILA_Tabla_anio_mes_Edad_sexo_DiagnosticoDefuncion_Todos.parquet"
+        variable: "DiagnosticoDefuncion"
+  - name: "vacunascovid"
     process: false
-    limit_records: 10000
-
+    input_path: "hdfs:///stagedata/vacunascovid2/"
+    input_subdirs:
+      - "vacunascovid_ver2_parquet_2021"
+      - "vacunascovid_ver2_parquet_2022"
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_files:
+      - file_name: "1.VACUNASCOVIDv2_Tabla_anio_mes_sexo_Edad_TipoRegimenAfiliacion_NroDosis_Biologico_CAC_Varios_CausaBasicaDeFuncion_DefuncionSospechosoCovid_Todos.parquet"
+        variable: "DefuncionSospechosoCovid"
+  - name: "nacimientos"
+    process: false
+    input_path: "hdfs:///stagedata/vitales/nacimientos"
+    input_subdirs: false
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_files:
+      - "1.VITALES_Nacimientos_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
+  - name: "defunciones"
+    process: false
+    input_path: "hdfs:///stagedata/vitales/defunciones"
+    input_subdirs: false
+    output_path: "hdfs:///analyticsdata/powerbi/"
+    output_files:
+      - "1.VITALES_Defunciones_Tabla_anio_mes_Sexo_Edad_RegimenAfiliacionSGSSS_Todos.parquet"
   - name: "rips"
-    input_path: "hdfs:///stagedata/rips/"
-    output_path: "hdfs:///analyticsdata/powerbi/"
-    output_file: "1.Tabla_anio_mes_atenciones_2020.parquet"
     process: false
-    limit_records: 10000
+    years:
+      2009: false
+      2010: false
+      2011: false
+      2012: false
+      2013: false
+      2014: false
+      2015: false
+      2016: false
+      2017: false
+      2018: false
+      2019: false
+      2020: false
+      2021: false
+      2022: false
+    input_path: "/stagedata/rips"
+    input_subdirs:
+      2009: "rips_parquet_2009"
+      2010: "rips_parquet_2010"
+      2011: "rips_parquet_2011"
+      2012: "rips_parquet_2012"
+      2013: "rips_parquet_2013"
+      2014: "rips_parquet_2014"
+      2015: "rips_parquet_2015"
+      2016: "rips_parquet_2016"
+      2017: "rips_parquet_2017"
+      2018: "rips_parquet_2018"
+      2019: "rips_parquet_2019"
+      2020: "rips_parquet_2020"
+      2021: "rips_parquet_2021"
+      2022: "rips_parquet_2022"
+    output_path: "/analyticsdata/powerbi"
+    output_files:
+      - file_name: "1.Tabla_anio_mes_atenciones"
+      - file_name: "2.Tabla_anio_mes_sexo"
+      - file_name: "3.Tabla_anio_mes_municipio"
+      - file_name: "4.Tabla_anio_mes_tipoeventoripsdesc"
+      - file_name: "5.Tabla_anio_mes_tipodiagnosticoprincipalcd"
+      - file_name: "6.Tabla_anio_mes_dxprincipal"
+      - file_name: "7.Tabla_anio_mes_codigoprocedimiento"
+      - file_name: "8.Tabla_anio_mes_municipio_sexo"
+      - file_name: "9.Tabla_anio_mes_tipoeventoripsdesc_sexo"
+      - file_name: "10.Tabla_anio_mes_edad"
+      - file_name: "11.Tabla_anio_mes_municipio_tipoeventorips_dxprincipal_sexo_edad"
+      - file_name: "12.Tabla_anio_mes_sexo_edad"
