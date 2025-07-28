@@ -79,7 +79,7 @@ El lago se despliega sobre el **HPC-ZINE**, utilizando tecnología de Big Data:
 ---
 
 
-## 📁 Estructura del repositorio
+## Estructura del repositorio
 
 Este repositorio **no contiene los datos sensibles ni los microdatos** del lago de datos ÁGORA. Aquí se encuentra únicamente la **estructura técnica para el montaje del lago** y los **procesos de extracción, transformación y carga (ETL)** aplicables a los datos crudos.
 
