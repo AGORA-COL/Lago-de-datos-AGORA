@@ -1,6 +1,6 @@
 # _Lago de datos ÁGORA_
 
-El **Lago de Datos ÁGORA** es una infraestructura de datos creada en la **Pontificia Universidad Javeriana** como parte del proyecto [ÁGORA]([https://www.javeriana.edu.co](https://agora-colombia.com/), financiado por los Ministerios de Ciencia, Tecnología e Innovación y de Salud y Protección Social de Colombia.
+El **Lago de Datos ÁGORA** es una infraestructura de datos creada en la **Pontificia Universidad Javeriana** como parte del proyecto [ÁGORA](https://agora-colombia.com/), financiado por los Ministerios de Ciencia, Tecnología e Innovación y de Salud y Protección Social de Colombia.
 
 Reúne información en salud pública de toda Colombia entre los años **2009 y 2023**, con el propósito de integrar, caracterizar y analizar cuantitativamente los datos del sistema de salud colombiano antes, durante y después de la pandemia por COVID-19.
 
