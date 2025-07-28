@@ -139,14 +139,14 @@ Este repositorio y desarrollo han sido posibles gracias al trabajo conjunto del 
 
 ---
 
-## Cómo citar este recurso
-
 ## Contribuciones
 Las contribuciones son bienvenidas. Puedes:
 
 - Hacer un fork del repositorio
 - Crear una rama con tus cambios
 - Enviar un Pull Request
+
+---
 
 ## Autores
 - Andrés Moreno.
@@ -158,9 +158,12 @@ Las contribuciones son bienvenidas. Puedes:
 - Zulma M. Cucunubá.
 - Alianza Caoba
 
+---
 
 ## Financiación
 Esta investigación fue financiada por el Ministerio de Ciencia, Tecnología e Innovación de Colombia, proyecto ÁGORA: “Alianza para la Generación de Evidencia sobre COVID-19, su Respuesta y Lecciones Aprendidas para la Postpandemia y Futuras Epidemias” (Contrato N° 637-2022).
+
+---
 
 ## Cómo citar este recurso
 Si utilizas esta rutina o sus sistemas de agrupación en tus análisis o publicaciones, por favor citarlo de la siguiente manera:
@@ -168,6 +171,8 @@ Si utilizas esta rutina o sus sistemas de agrupación en tus análisis o publica
 Moreno, A., Murillo, J., Bonilla, D., Calderón Rodríguez, J. M., Torres, J. G., Pavlich-Mariscal, J. A., Cucunubá, Z. M., & Alianza Caoba. (2025). ÁGORA: Ciencia y decisiones en salud pública. Proyecto ÁGORA Colombia. 
 
 También puedes exportar esta cita en formatos como BibTeX, RIS, APA y más desde el botón “Cite this repository” en la parte superior derecha de este repositorio (disponible si has agregado el archivo CITATION.cff).
+
+---
 
 ## Contacto
 Si tienes preguntas, sugerencias o comentarios, por favor crea un Issue en este repositorio.
