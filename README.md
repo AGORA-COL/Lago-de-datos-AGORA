@@ -193,5 +193,5 @@ También puedes exportar esta cita en formatos como BibTeX, RIS, APA y más desd
 ---
 
 ## Contacto
-Si tienes preguntas, sugerencias o comentarios, por favor crea un Issue en este repositorio.
+Si tienes preguntas, sugerencias o comentarios, por favor crea un Issue en este repositorio o escribir al siguiente correo: zulma.cucunuba@javeriana.edu.co
 
