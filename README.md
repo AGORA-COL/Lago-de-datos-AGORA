@@ -78,6 +78,23 @@ El lago se despliega sobre el **HPC-ZINE**, utilizando tecnología de Big Data:
 
 ---
 
+
+## 📁 Estructura del repositorio
+
+Este repositorio **no contiene los datos sensibles ni los microdatos** del lago de datos ÁGORA. Aquí se encuentra únicamente la **estructura técnica para el montaje del lago** y los **procesos de extracción, transformación y carga (ETL)** aplicables a los datos crudos.
+
+Si necesitas información específica de alguna base de datos o conjunto de variables, por favor **contacta a los autores**. La información contenida en el lago es **sensible y está bajo custodia del proyecto**, por lo que su acceso se gestiona de forma controlada y confidencial.
+
+A continuación, se describen las carpetas incluidas en este repositorio:
+
+| Carpeta       | Descripción |
+|---------------|-------------|
+| `Documentos/` | Contiene manuales técnicos, instructivos y documentación clave para entender la estructura del lago de datos ÁGORA, su arquitectura y su implementación. |
+| `ETL/`        | Incluye scripts y flujos para realizar procesos de Extracción, Transformación y Carga (ETL) a partir de las fuentes de datos crudas. |
+| `Notebooks/`  | Contiene notebooks en R y/o Python con scripts de analítica utilizados para el análisis exploratorio, generación de tablas y figuras, y la preparación de datos para visualizaciones (por ejemplo, en Power BI). |
+
+
+---
 ## Acceso y procesamiento
 
 El acceso se realiza vía **Jupyter Notebooks** usando **R o Python**, sobre un clúster privado con acceso restringido vía VPN.
