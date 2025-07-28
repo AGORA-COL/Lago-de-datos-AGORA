@@ -173,7 +173,7 @@ Las contribuciones son bienvenidas. Puedes:
 - Juan Guillermo Torres.
 - Jaime Pavlich-Mariscal.
 - Zulma M. Cucunubá.
-- Alianza Caoba
+
 
 ---
 
