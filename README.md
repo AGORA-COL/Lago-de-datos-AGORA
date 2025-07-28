@@ -129,7 +129,7 @@ Agrupación centrada en comorbilidades crónicas relevantes. Incluye:
 - Úlcera péptica (36 códigos)
 
 
-🧪 Nota: Estas mismas agrupaciones han sido implementadas en R mediante el paquete epiAgora, el cual facilita su aplicación en conjuntos de datos estructurados bajo el lago de datos ÁGORA u otras bases con códigos CIE-10 en el software de libre accceso R.
+**Nota:** Estas mismas agrupaciones han sido implementadas en el software R mediante el paquete [epiAgora](https://github.com/AGORA-COL/epiAgora), el cual facilita su aplicación en conjuntos de datos estructurados bajo el lago de datos ÁGORA u otras bases con códigos CIE-10.
 
 ---
 
