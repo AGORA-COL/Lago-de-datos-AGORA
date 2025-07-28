@@ -170,6 +170,7 @@ Las contribuciones son bienvenidas. Puedes:
 - Jennifer Murillo-Alvarado.
 - Daniel Santiago Bonilla Betancourth.
 - Johan Manuel Calderón Rodríguez.
+- Jenny Marcela Pinilla.
 - Juan Guillermo Torres.
 - Jaime Pavlich-Mariscal.
 - Zulma M. Cucunubá.
