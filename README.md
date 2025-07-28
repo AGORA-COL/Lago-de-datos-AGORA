@@ -25,9 +25,9 @@ El lago de datos integra microdatos anonimizados provenientes de múltiples fuen
 - **Plan Nacional de Vacunación contra COVID-19**
 - **Datos públicos**: ocupación hospitalaria, movilidad, demografía, entre otros.
 
-Todos los datos cuentan con un **pseudoidentificador no reversible** para permitir su interoperabilidad de forma segura.
+Todos los datos cuentan con un pseudoidentificador no reversible para permitir su interoperabilidad de forma segura.
 
-⚠️ Importante: Este repositorio no contiene los datos sensibles ni los microdatos del lago de datos ÁGORA. Aquí se encuentra únicamente la estructura técnica para el montaje del lago y los procesos de extracción, transformación y carga (ETL) aplicables a los datos crudos.
+⚠️ **Importante:** Este repositorio no contiene los datos sensibles ni los microdatos del lago de datos ÁGORA. Aquí se encuentra únicamente la estructura técnica para el montaje del lago y los procesos de extracción, transformación y carga (ETL) aplicables a los datos crudos.
 
 Si necesitas información específica de alguna base de datos o conjunto de variables, por favor contacta a los autores. La información contenida en el lago es sensible y está bajo custodia del proyecto, por lo que su acceso se gestiona de forma controlada y confidencial.
 
@@ -80,13 +80,7 @@ El lago se despliega sobre el **HPC-ZINE**, utilizando tecnología de Big Data:
 
 ## Acceso y procesamiento
 
-El acceso se realiza vía **Jupyter Notebooks** usando **R o Python**, sobre un clúster privado con:
-
-- 128 núcleos CPU (IBM Power 9)
-- 250 GB RAM
-- 1.1 TB de almacenamiento SAN
-- OS: Rocky Linux 9.4
-- Acceso restringido vía VPN
+El acceso se realiza vía **Jupyter Notebooks** usando **R o Python**, sobre un clúster privado con acceso restringido vía VPN.
 
 ---
 
